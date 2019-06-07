@@ -107,7 +107,7 @@ class DatabaseTest {
     }
 
     static async insertJsonBlobTestPostgres() {
-        console.log(`Inserting ${this.#config.DATA_INSERT_LOOP_COUNT * this.#payloadData.length} test items into two test tables in database!`);
+        console.log(`Inserting ${this.#config.DATA_INSERT_LOOP_COUNT * this.#payloadData.length} test items each into two test tables in database -- JSON and JSONB being tested!`);
 
         for (let i = 0; i < this.#config.DATA_INSERT_LOOP_COUNT; i++) {
             console.log(`Data insert loop ${i+1} of ${this.#config.DATA_INSERT_LOOP_COUNT} executing...`);
@@ -167,14 +167,6 @@ class DatabaseTest {
         for (let i = 0; i < this.#config.TEST_ITERATION_COUNT; i++) {
             console.log(`Executing test iteration ${i+1} of ${this.#config.TEST_ITERATION_COUNT}`);
 
-            // const random1 = this.generateRandomNumber(1, this.#maxRecords);
-            // const result1 = await this.#postgres.pool.query(`SELECT value FROM test_json WHERE id = ${random1}`);
-            // const blob1 = result1.rows[0].value;
-            // const startTime1 = new Date();
-            // await this.#postgres.pool.query(`SELECT value->'${this.getRandomPropertyName(blob1)}' FROM test_json WHERE id = ${random1}`);
-            // const endTime1 = new Date();
-            // this.#postgres.results.json.partialBlobWrite.push(endTime1 - startTime1);
-
             const random2 = this.generateRandomNumber(1, this.#maxRecords);
             const result2 = await this.#postgres.pool.query(`SELECT value FROM test_jsonb WHERE id = ${random2}`);
             const blob2 = result2.rows[0].value;
@@ -186,9 +178,6 @@ class DatabaseTest {
 
         console.log('Write Partial Json Blob Test Complete!');
         console.log('Results:');
-        this.#postgres.results.json.partialBlobWriteAverage = this.average(this.#postgres.results.json.partialBlobWrite);
-        console.log(`WRITE PARTIAL BLOB JSON AVERAGE: ${this.#postgres.results.json.partialBlobWriteAverage}ms`);
-
         this.#postgres.results.jsonb.partialBlobWriteAverage = this.average(this.#postgres.results.jsonb.partialBlobWrite);
         console.log(`WRITE PARTIAL BLOB JSONB AVERAGE: ${this.#postgres.results.jsonb.partialBlobWriteAverage}ms`);
     }
