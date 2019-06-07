@@ -1,0 +1,10 @@
+.DS_Store
+[Tt]humbs.db
+
+.idea/
+
+node_modules/
+*.log
+
+# don't need to hold onto this -- not production service
+package-lock.json

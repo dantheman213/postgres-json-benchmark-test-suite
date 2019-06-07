@@ -1,0 +1,24 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:4.0.9-xenial
+    ports:
+      - 27017:27017
+    restart: "always"
+
+  postgres:
+    image: postgres:11.3
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    restart: "always"
+
+  database-tests:
+    build: .
+    env_file:
+      - config.env
+    depends_on:
+      - mongo
+      - postgres
+    restart: "no"

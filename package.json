@@ -1,0 +1,13 @@
+{
+  "name": "database-tests",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node src/app"
+  },
+  "dependencies": {
+    "mongodb": "^3.2.7",
+    "node-uuid": "^1.4.8",
+    "object-sizeof": "^1.4.0",
+    "pg": "^7.11.0"
+  }
+}
